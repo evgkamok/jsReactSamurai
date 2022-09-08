@@ -1,0 +1,30 @@
+.appWrapper {
+	width: 1200px;
+	margin: 0 auto;
+
+	font-size: 25px;
+	display: grid;
+	grid-template-areas:
+		'h h'
+		's c';
+	grid-template-rows: 50px 10fr;
+	grid-template-columns: 1fr 8fr;
+
+	.header {
+		grid-area: h;
+		background-color: thistle;
+	}
+
+	.sideBar {
+		grid-area: s;
+		color: green;
+		padding: 10px;
+		background-color: beige;
+	}
+
+	.content {
+		grid-area: c;
+		padding: 10px;
+		background-color: darkgray;
+	}
+}

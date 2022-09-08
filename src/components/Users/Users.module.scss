@@ -1,0 +1,27 @@
+.wrapper {
+	padding: 10px;
+	font-size: 18px;
+
+	.activePage {
+		font-weight: bold;
+		margin: 5px;
+	}
+
+	.numberPage {
+		margin: 5px;
+		cursor: pointer;
+	}
+
+	.user {
+		margin-bottom: 30px;
+		// flood-color: burlywood;
+
+		.userPhoto img {
+			width: 100px;
+			height: 100px;
+		}
+
+		.followButton {
+		}
+	}
+}
