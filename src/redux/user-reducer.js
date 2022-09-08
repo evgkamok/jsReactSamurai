@@ -1,7 +1,7 @@
-import userAPI from '../api/api';
+import { userAPI } from '../api/api';
 
-const FOLLOW = 'FOLLOW';
-const NOFOLLOW = 'NOFOLLOW';
+const START_FOLLOW = 'START_FOLLOW';
+const STOP_FOLLOW = 'STOP_FOLLOW';
 const SET_USERS = 'SET_USERS';
 const SET_TOTAL_COUNT_PAGE = 'SET_TOTAL_COUNT_PAGE';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
@@ -26,12 +26,12 @@ const initialState = {
 	totalCountPage: 0,
 	currentPage: 1,
 	isFetching: false,
-	stackButtonDisabled: [],
+	buttonsDisabledStack: [],
 };
 
 const userReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case FOLLOW:
+		case START_FOLLOW:
 			return {
 				...state,
 				users: state.users.map((user) => {
@@ -44,7 +44,7 @@ const userReducer = (state = initialState, action) => {
 					return user;
 				}),
 			};
-		case NOFOLLOW:
+		case STOP_FOLLOW:
 			return {
 				...state,
 				users: state.users.map((user) => {
@@ -80,9 +80,9 @@ const userReducer = (state = initialState, action) => {
 		case SET_DISABLE_FOLLOW_BUTTON:
 			return {
 				...state,
-				stackButtonDisabled: action.status
-					? [...state.stackButtonDisabled, action.id]
-					: state.stackButtonDisabled.filter((id) => id !== action.id),
+				buttonsDisabledStack: action.status
+					? [...state.buttonsDisabledStack, action.id]
+					: state.buttonsDisabledStack.filter((id) => id !== action.id),
 			};
 		default:
 			return state;
@@ -92,8 +92,8 @@ const userReducer = (state = initialState, action) => {
 const setUsers = (payload) => ({ type: SET_USERS, payload });
 const setTotalCountPage = (payload) => ({ type: SET_TOTAL_COUNT_PAGE, payload });
 const setIsFetching = (payload) => ({ type: SET_IS_FETCHING, payload });
-const follow = (userId) => ({ type: FOLLOW, userId });
-const nofollow = (userId) => ({ type: NOFOLLOW, userId });
+const startFollowUser = (userId) => ({ type: START_FOLLOW, userId });
+const stopFollowUser = (userId) => ({ type: STOP_FOLLOW, userId });
 const setDisableFollowButton = (id, status) => ({
 	type: SET_DISABLE_FOLLOW_BUTTON,
 	id,
@@ -110,21 +110,21 @@ export const getUsers = (currentPage, countOnPage) => (dispatch) => {
 	});
 };
 
-export const followUser = (userId) => (dispatch) => {
+export const startFollowUserRequest = (userId) => (dispatch) => {
 	dispatch(setDisableFollowButton(userId, true));
-	userAPI.followUser(userId).then((response) => {
+	userAPI.startFollow(userId).then((response) => {
 		if (response.data.resultCode === 0) {
-			dispatch(follow(userId));
+			dispatch(startFollowUser(userId));
 			dispatch(setDisableFollowButton(userId, false));
 		}
 	});
 };
 
-export const noFollowUser = (userId) => (dispatch) => {
+export const stopFollowUserRequest = (userId) => (dispatch) => {
 	dispatch(setDisableFollowButton(userId, true));
-	userAPI.noFollowUser(userId).then((response) => {
+	userAPI.stopFollow(userId).then((response) => {
 		if (response.data.resultCode === 0) {
-			dispatch(nofollow(userId));
+			dispatch(stopFollowUser(userId));
 			dispatch(setDisableFollowButton(userId, false));
 		}
 	});

@@ -1,7 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Users from './Users';
-import { setCurrentPage, getUsers, followUser, noFollowUser } from '../../redux/user-reducer';
+import {
+	setCurrentPage,
+	getUsers,
+	startFollowUserRequest,
+	stopFollowUserRequest,
+} from '../../redux/user-reducer';
 
 class UserContainer extends React.Component {
 	componentDidMount() {
@@ -26,9 +31,9 @@ class UserContainer extends React.Component {
 				changeCurrentPage={this.changeCurrentPage}
 				users={this.props.users}
 				isFetching={this.props.isFetching}
-				stackButtonDisabled={this.props.stackButtonDisabled}
-				followUser={this.props.followUser}
-				noFollowUser={this.props.noFollowUser}
+				buttonsDisabledStack={this.props.buttonsDisabledStack}
+				startFollowUserRequest={this.props.startFollowUserRequest}
+				stopFollowUserRequest={this.props.stopFollowUserRequest}
 			/>
 		);
 	}
@@ -41,13 +46,13 @@ const mapStateToProps = (state) => {
 		totalCountPage: state.userPage.totalCountPage,
 		currentPage: state.userPage.currentPage,
 		isFetching: state.userPage.isFetching,
-		stackButtonDisabled: state.userPage.stackButtonDisabled,
+		buttonsDisabledStack: state.userPage.buttonsDisabledStack,
 	};
 };
 
 export default connect(mapStateToProps, {
 	setCurrentPage,
 	getUsers,
-	followUser,
-	noFollowUser,
+	startFollowUserRequest,
+	stopFollowUserRequest,
 })(UserContainer);

@@ -8,20 +8,28 @@ const axiosInstance = axios.create({
 	},
 });
 
-const userAPI = {
+export const userAPI = {
 	getUsers(currentPage = 1, countOnPage = 25) {
 		return axiosInstance
 			.get(`users?page=${currentPage}&count=${countOnPage}`)
 			.then((response) => response.data);
 	},
 
-	followUser(userId) {
+	startFollow(userId) {
 		return axiosInstance.post(`follow/${userId}`).then((response) => response);
 	},
 
-	noFollowUser(userId) {
+	stopFollow(userId) {
 		return axiosInstance.delete(`follow/${userId}`).then((response) => response);
+	},
+
+	getUserProfileData(userId) {
+		return axiosInstance.get(`profile/${userId}`);
 	},
 };
 
-export default userAPI;
+export const userAuth = {
+	authMe() {
+		return axiosInstance.get(`auth/me`);
+	},
+};

@@ -1,22 +1,27 @@
-const SET_USER_PROFILE = 'SET_USER_PROFILE'
+import { userAPI } from '../api/api';
+
+const SET_USER_PROFILE_DATA = 'SET_USER_PROFILE_DATA ';
 
 const initialState = {
-  userProfileData: null
-}
+	userProfileData: null,
+};
 
-const profileReducer = (state = initialState, { type, payload }) => {
-  switch (type) {
+const profileReducer = (state = initialState, action) => {
+	switch (action.type) {
+		case SET_USER_PROFILE_DATA:
+			return { ...state, userProfileData: { ...action.data } };
 
-  case SET_USER_PROFILE:
-    return { ...state, userProfileData: {...payload} }
+		default:
+			return state;
+	}
+};
 
-  default:
-    return state
-  }
-}
+export const setUserProfileData = (data) => ({ type: SET_USER_PROFILE_DATA, data });
 
-
-export const setUserProfile = (payload) => ({type: SET_USER_PROFILE, payload})
-
+export const setUserProfileDataRequest = (userId) => (dispatch) => {
+	userAPI.getUserProfileData(userId).then((response) => {
+		dispatch(setUserProfileData(response.data));
+	});
+};
 
 export default profileReducer;

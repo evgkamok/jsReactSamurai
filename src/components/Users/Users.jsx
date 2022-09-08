@@ -5,7 +5,6 @@ import Preloader from '../common/Preloader/Preloader';
 import { NavLink } from 'react-router-dom';
 
 const Users = (props) => {
-	console.log(props);
 	return (
 		<div className={style.wrapper}>
 			{props.isFetching ? <Preloader /> : null}
@@ -34,18 +33,18 @@ const Users = (props) => {
 						<div className={style.followButton}>
 							{user.followed ? (
 								<button
-									disabled={props.stackButtonDisabled.some((id) => id === user.id)}
+									disabled={props.buttonsDisabledStack.some((id) => id === user.id)}
 									onClick={() => {
-										props.noFollowUser(user.id);
+										props.stopFollowUserRequest(user.id);
 									}}
 								>
 									No Follow
 								</button>
 							) : (
 								<button
-									disabled={props.stackButtonDisabled.some((id) => id === user.id)}
+									disabled={props.buttonsDisabledStack.some((id) => id === user.id)}
 									onClick={() => {
-										props.followUser(user.id);
+										props.startFollowUserRequest(user.id);
 									}}
 								>
 									Follow
