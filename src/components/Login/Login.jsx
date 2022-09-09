@@ -20,10 +20,10 @@ export default class Login extends Component {
 	render() {
 		return (
 			<div>
-				<div>Login</div>
+				<div>Login please</div>
 				<div>
-					<button onClick={this.test}>Start</button>
-					<div>{this.state.editMode ? 'true' : 'false'}</div>
+					<button onClick={this.test}>Login</button>
+					{/* <div>{this.state.editMode ? 'true' : 'false'}</div> */}
 				</div>
 			</div>
 		);

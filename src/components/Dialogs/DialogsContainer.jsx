@@ -7,6 +7,7 @@ import withAuthRedirect from '../../hoc/withAuthRedirect';
 const mapStateToProps = (state) => ({
 	listMessage: state.dialogsPage.dialogs,
 	newTextMessage: state.dialogsPage.newTextMessage,
+	isAuth: state.authUser.isAuth,
 });
 
 const mapDispatchToProps = (dispatch) => ({

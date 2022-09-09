@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './TestComponent.module.scss';
+import './TestComponent.module.scss';
 
 export default function TestComponent(props) {
 	return (

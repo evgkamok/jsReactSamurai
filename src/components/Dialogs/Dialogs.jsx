@@ -1,5 +1,6 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Navigate, NavLink } from 'react-router-dom';
+import Login from '../Login/Login';
 import style from './Dialogs.module.scss';
 
 const Dialogs = (props) => {
@@ -8,6 +9,11 @@ const Dialogs = (props) => {
 			{textMessage}
 		</div>
 	));
+
+	if (props.isAuth === false) {
+		// return <Login />;
+		return <Navigate to={'/login'} />;
+	}
 
 	return (
 		<div className={style.wrapper}>
