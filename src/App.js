@@ -22,8 +22,6 @@ const App = () => {
 				<Route path='/about' element={<About />} />
 				<Route path='/login' element={<Login />} />
 				<Route path='/test' element={<TestComponentContainer />} />
-				<Route path='/test/new' element={<About />} />
-				<Route path='/test/:id/edit' element={<TestComponentContainer />} />
 			</Route>
 		</Routes>
 	);
