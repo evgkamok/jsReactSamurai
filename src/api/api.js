@@ -28,6 +28,16 @@ export const userAPI = {
 	},
 };
 
+export const profileAPI = {
+	getUserProfileStatus(userId) {
+		return axiosInstance.get(`/profile/status/${userId}`);
+	},
+
+	updateUserProfileStatus(status) {
+		return axiosInstance.put(`/profile/status/`, { status });
+	},
+};
+
 export const userAuth = {
 	authMe() {
 		return axiosInstance.get(`auth/me`);
