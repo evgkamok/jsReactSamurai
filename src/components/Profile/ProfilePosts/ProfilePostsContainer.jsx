@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { addPostCreate, updatePostTextCreate } from '../../redux/posts-reducer';
-import Posts from './Posts';
+import { addPostCreate, updatePostTextCreate } from '../../../redux/posts-reducer';
+import ProfilePosts from './ProfilePosts';
 
 const mapStateToProps = (state) => ({
 	postsList: state.postsPage.posts,
@@ -12,6 +12,6 @@ const mapDispatchToProps = (dispatch) => ({
 	addPost: () => dispatch(addPostCreate()),
 });
 
-const PostsContainer = connect(mapStateToProps, mapDispatchToProps)(Posts);
+const ProfilePostsContainer = connect(mapStateToProps, mapDispatchToProps)(ProfilePosts);
 
-export default PostsContainer;
+export default ProfilePostsContainer;

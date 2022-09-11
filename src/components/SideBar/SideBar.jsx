@@ -5,7 +5,6 @@ import style from './SideBar.module.css';
 const item_names = [
 	{ name: 'Profile', path: '/profile', key: '5' },
 	{ name: 'Dialogs', path: '/dialogs', key: '1' },
-	{ name: 'Posts', path: '/posts', key: '2' },
 	{ name: 'Users', path: '/users', key: '3' },
 	{ name: 'About', path: '/about', key: '4' },
 ];

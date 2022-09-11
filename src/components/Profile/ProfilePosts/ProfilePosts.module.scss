@@ -1,0 +1,25 @@
+.wrapper {
+	display: grid;
+	grid-template-areas: 'addPost showPosts';
+	grid-template-columns: 5fr 10fr;
+
+	.addPost {
+		grid-area: addPost;
+		padding: 10px;
+		text-align: center;
+
+		.sendButton {
+			display: block;
+			margin: 0 auto;
+		}
+	}
+
+	.showPosts {
+		grid-area: showPosts;
+		padding: 20px;
+
+		.post {
+			margin-bottom: 20px;
+		}
+	}
+}
