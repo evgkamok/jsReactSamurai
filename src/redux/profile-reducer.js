@@ -5,7 +5,7 @@ const SET_USER_PROFILE_STATUS = 'SET_USER_PROFILE_STATUS';
 
 const initialState = {
 	userProfileData: null,
-	userProfileStatus: 'user_status',
+	userProfileStatus: 'user_status2222',
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -13,7 +13,7 @@ const profileReducer = (state = initialState, action) => {
 		case SET_USER_PROFILE_DATA:
 			return { ...state, userProfileData: { ...action.data } };
 		case SET_USER_PROFILE_STATUS:
-			return { ...state, userProfileStatus: action.newStatus ? action.newStatus : 'no Status' };
+			return { ...state, userProfileStatus: action.newStatus ? action.newStatus : 'aasdasd' };
 		default:
 			return state;
 	}

@@ -1,31 +1,38 @@
-// import React from 'react'
-// export default function Login() {
-//   return (
-//     <div>Login</div>
-//   )
-// }
-
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import style from './Login.module.scss';
+import { reduxForm, Field } from 'redux-form';
 
-export default class Login extends Component {
-	state = {
-		editMode: false,
-	};
-
-	test = () => {
-		alert(this.state.editMode);
-	};
-
-	render() {
-		return (
+const LoginForm = (props) => {
+	return (
+		<form onSubmit={props.handleSubmit}>
 			<div>
-				<div>Login please</div>
-				<div>
-					<button onClick={this.test}>Login</button>
-					{/* <div>{this.state.editMode ? 'true' : 'false'}</div> */}
-				</div>
+				<Field placeholder={'Email'} component={'input'} name={'login'} />
 			</div>
-		);
-	}
-}
+			<div>
+				<Field placeholder={'Password'} component={'input'} name={'password'} type='text' />
+			</div>
+			<div>
+				<Field component={'input'} name={'rememberMe'} type='checkbox' />
+				<span className={style.rememberMe}>Remember me</span>
+			</div>
+			<button>Login</button>
+		</form>
+	);
+};
+
+const LoginReduxForm = reduxForm({ form: 'loginForm' })(LoginForm);
+
+const Login = () => {
+	const onSubmit = (formData) => {
+		console.log(formData);
+	};
+
+	return (
+		<div>
+			<h3>Login</h3>
+			<LoginReduxForm onSubmit={onSubmit} />
+		</div>
+	);
+};
+
+export default Login;

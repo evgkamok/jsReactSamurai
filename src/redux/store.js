@@ -6,6 +6,7 @@ import postsReducer from './posts-reducer';
 import profileReducer from './profile-reducer';
 import userReducer from './user-reducer';
 import testReducer from '../components/TestComponent/test-reducer';
+import { reducer as formReducer } from 'redux-form';
 
 const reducers = combineReducers({
 	dialogsPage: dialogsReducer,
@@ -14,6 +15,7 @@ const reducers = combineReducers({
 	profilePage: profileReducer,
 	authUser: authReducer,
 	testPage: testReducer,
+	form: formReducer,
 });
 
 const store = createStore(reducers, applyMiddleware(thunk));
