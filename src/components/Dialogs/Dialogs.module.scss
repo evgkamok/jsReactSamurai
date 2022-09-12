@@ -2,15 +2,13 @@
 	padding: 5px;
 	display: grid;
 	grid-template-areas:
-		'contacts showMessage'
-		'addMessage addMessage';
+		'contacts addMessage'
+		'contacts showMessage';
 	grid-template-columns: 2fr 10fr;
-	grid-template-rows: 25vh 75vh;
+	grid-template-rows: 20vh 80vh;
 
 	.contacts {
 		grid-area: contacts;
-		padding: 15px;
-		background-color: rgb(124, 100, 70);
 
 		a {
 			display: block;
@@ -19,31 +17,23 @@
 
 	.showMessage {
 		grid-area: showMessage;
-		margin-left: 35px;
 		background-color: lightpink;
-		padding: 15px;
+		padding: 10px;
 		overflow-y: auto;
 
 		.message {
-			margin-bottom: 5px;
+			margin-bottom: 10px;
 		}
 	}
 
 	.addMessage {
 		grid-area: addMessage;
-		margin-top: 20px;
-		padding: 15px;
+		padding: 10px;
 		background-color: cadetblue;
-
-		.textArea {
-			display: block;
-			padding: 5px;
-			width: 99%;
-		}
 
 		button {
 			display: block;
-			margin: 10px auto;
+			margin: 0;
 		}
 	}
 }

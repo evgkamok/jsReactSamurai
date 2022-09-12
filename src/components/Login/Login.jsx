@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import style from './Login.module.scss';
 import { reduxForm, Field } from 'redux-form';
 

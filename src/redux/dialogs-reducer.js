@@ -1,43 +1,28 @@
-const UPDATE_TEXT_MESSAGE = "UPDATE-TEXT-MESSAGE";
-const ADD_MESSAGE = "ADD-MESSAGE";
+const ADD_MESSAGE = 'ADD-MESSAGE';
 
 const initialState = {
-  dialogs: [
-    { id: 1, textMessage: "First" },
-    { id: 2, textMessage: "Second" },
-    { id: 3, textMessage: "Third" },
-  ],
-  newTextMessage: "",
+	dialogs: [
+		{ id: 1, textMessage: 'First' },
+		{ id: 2, textMessage: 'Second' },
+		{ id: 3, textMessage: 'Third' },
+	],
 };
 
 const dialogsReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case UPDATE_TEXT_MESSAGE:
-      return {
-        ...state,
-        newTextMessage: action.text,
-      };
-    case ADD_MESSAGE:
-      return {
-        ...state,
-        newTextMessage: "",
-        dialogs: [
-          ...state.dialogs,
-          { id: 5, textMessage: state.newTextMessage },
-        ],
-      };
-    default:
-      return state;
-  }
+	switch (action.type) {
+		case ADD_MESSAGE:
+			return {
+				...state,
+				dialogs: [...state.dialogs, { id: 5, textMessage: action.newTextMessage }],
+			};
+		default:
+			return state;
+	}
 };
 
-export const updateTextMessageCreate = (text) => ({
-  type: UPDATE_TEXT_MESSAGE,
-  text: text,
-});
-
-export const postNewMessageCreate = () => ({
-  type: ADD_MESSAGE,
+export const postNewMessageCreate = (newTextMessage) => ({
+	type: ADD_MESSAGE,
+	newTextMessage,
 });
 
 export default dialogsReducer;
