@@ -1,15 +1,30 @@
 import React from 'react';
 import style from './Login.module.scss';
 import { reduxForm, Field } from 'redux-form';
+import { FormControlCustomField } from '../common/Preloader/FormsControl/FormsControl';
+import { requiredFiled } from '../../utils/form-validators/validators';
 
 const LoginForm = (props) => {
+	const InputLogin = FormControlCustomField('input');
+	const InputPassword = FormControlCustomField('input');
+
 	return (
 		<form onSubmit={props.handleSubmit}>
 			<div>
-				<Field placeholder={'Email'} component={'input'} name={'login'} />
+				<Field
+					placeholder={'Email'}
+					component={InputLogin}
+					name={'login'}
+					validate={requiredFiled}
+				/>
 			</div>
 			<div>
-				<Field placeholder={'Password'} component={'input'} name={'password'} type='text' />
+				<Field
+					placeholder={'Password'}
+					component={InputPassword}
+					name={'password'}
+					validate={requiredFiled}
+				/>
 			</div>
 			<div>
 				<Field component={'input'} name={'rememberMe'} type='checkbox' />

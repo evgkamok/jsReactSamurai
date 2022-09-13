@@ -1,14 +1,20 @@
 import React from 'react';
 import style from './ProfilePosts.module.scss';
 import { Field, reduxForm } from 'redux-form';
+import { maxLengthField, requiredFiled } from '../../../utils/form-validators/validators';
+import { FormControlCustomField } from '../../common/Preloader/FormsControl/FormsControl';
+
+const controlMaxLengthField10 = maxLengthField(10);
+const TextAreaNewPost = FormControlCustomField('textarea');
 
 const AddPostForm = (props) => {
 	return (
 		<form onSubmit={props.handleSubmit}>
 			<Field
-				component={'textarea'}
+				component={TextAreaNewPost}
 				name={'addPostField'}
 				placeholder={'Type here your new post'}
+				validate={[requiredFiled, controlMaxLengthField10]}
 				cols={35}
 				rows={10}
 			></Field>
