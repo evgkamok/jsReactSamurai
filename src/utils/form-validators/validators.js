@@ -1,9 +1,18 @@
-export const requiredFiled = (value) => {
-	if (value) return undefined;
-	return 'Field is required';
+export const required = (value) => {
+	// console.log('req');
+	return value ? undefined : 'Required';
+};
+export const mustBeNumber = (value) => (isNaN(value) ? 'Must be a number' : undefined);
+export const maxLength = (maxLength) => (value) => {
+	console.log('re2q');
+
+	return value.length >= maxLength ? `Max length is ${maxLength} symbols` : undefined;
 };
 
-export const maxLengthField = (maxLength) => (value) => {
-	if (value.length >= maxLength) return `Max length is ${maxLength} symbols`;
-	return undefined;
-};
+const minValue = (min) => (value) =>
+	isNaN(value) || value >= min ? undefined : `Should be greater than ${min}`;
+
+export const composeValidators =
+	(...validators) =>
+	(value) =>
+		validators.reduce((error, validator) => error || validator(value), undefined);

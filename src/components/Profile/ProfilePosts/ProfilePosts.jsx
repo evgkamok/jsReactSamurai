@@ -1,29 +1,32 @@
 import React from 'react';
 import style from './ProfilePosts.module.scss';
-import { Field, reduxForm } from 'redux-form';
-import { maxLengthField, requiredFiled } from '../../../utils/form-validators/validators';
-import { FormControlCustomField } from '../../common/Preloader/FormsControl/FormsControl';
+import { composeValidators, maxLength, required } from '../../../utils/form-validators/validators';
+import { Form, Field } from 'react-final-form';
+import { CustomControlComponent } from '../../common/Preloader/FormsControl/FormsControl';
 
-const controlMaxLengthField10 = maxLengthField(10);
-const TextAreaNewPost = FormControlCustomField('textarea');
-
-const AddPostForm = (props) => {
+const AddPostForm = () => {
+	const onSubmit = (data) => console.log(data);
 	return (
-		<form onSubmit={props.handleSubmit}>
-			<Field
-				component={TextAreaNewPost}
-				name={'addPostField'}
-				placeholder={'Type here your new post'}
-				validate={[requiredFiled, controlMaxLengthField10]}
-				cols={35}
-				rows={10}
-			></Field>
-			<button>Add Post</button>
-		</form>
+		<Form
+			onSubmit={onSubmit}
+			render={({ handleSubmit }) => (
+				<form onSubmit={handleSubmit}>
+					<Field
+						name={'textPost'}
+						autofocus
+						validate={composeValidators(required, maxLength(10))}
+						placeholder={'Type here your new post'}
+						cols={35}
+						rows={10}
+					>
+						{CustomControlComponent('textarea')}
+					</Field>
+					<button type='submit'>Add Post</button>
+				</form>
+			)}
+		/>
 	);
 };
-
-const AddPostReduxForm = reduxForm({ form: 'addPostForm' })(AddPostForm);
 
 const ProfilePosts = (props) => {
 	const onSubmit = (formData) => {
@@ -39,7 +42,7 @@ const ProfilePosts = (props) => {
 	return (
 		<div className={style.wrapper}>
 			<div className={style.addPost}>
-				<AddPostReduxForm onSubmit={onSubmit} />
+				<AddPostForm onSubmit={onSubmit} />
 			</div>
 			<div className={style.showPosts}>{postList}</div>
 		</div>

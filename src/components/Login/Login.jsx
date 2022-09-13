@@ -1,51 +1,49 @@
 import React from 'react';
 import style from './Login.module.scss';
-import { reduxForm, Field } from 'redux-form';
-import { FormControlCustomField } from '../common/Preloader/FormsControl/FormsControl';
-import { requiredFiled } from '../../utils/form-validators/validators';
+import { CustomControlComponent } from '../common/Preloader/FormsControl/FormsControl';
+import { Form, Field } from 'react-final-form';
+import { composeValidators } from '../../utils/form-validators/validators';
 
-const LoginForm = (props) => {
-	const InputLogin = FormControlCustomField('input');
-	const InputPassword = FormControlCustomField('input');
+const required = (value) => (value ? undefined : 'Required');
+const mustBeNumber = (value) => (isNaN(value) ? 'Must be a number' : undefined);
 
-	return (
-		<form onSubmit={props.handleSubmit}>
-			<div>
-				<Field
-					placeholder={'Email'}
-					component={InputLogin}
-					name={'login'}
-					validate={requiredFiled}
-				/>
-			</div>
-			<div>
-				<Field
-					placeholder={'Password'}
-					component={InputPassword}
-					name={'password'}
-					validate={requiredFiled}
-				/>
-			</div>
-			<div>
-				<Field component={'input'} name={'rememberMe'} type='checkbox' />
-				<span className={style.rememberMe}>Remember me</span>
-			</div>
-			<button>Login</button>
-		</form>
-	);
-};
-
-const LoginReduxForm = reduxForm({ form: 'loginForm' })(LoginForm);
-
-const Login = () => {
+const LoginForm = () => {
 	const onSubmit = (formData) => {
 		console.log(formData);
 	};
 
 	return (
+		<Form
+			onSubmit={onSubmit}
+			render={({ handleSubmit }) => (
+				<form onSubmit={handleSubmit}>
+					<Field name={'email'} validate={composeValidators(required)} placeholder={'Email'}>
+						{CustomControlComponent('input')}
+					</Field>
+					<Field
+						name={'password'}
+						type={'password'}
+						validate={composeValidators(required, mustBeNumber)}
+						placeholder={'Password'}
+					>
+						{CustomControlComponent('input')}
+					</Field>
+					<div>
+						<Field component={'input'} name={'rememberMe'} type='checkbox' />
+						<span className={style.rememberMe}>Remember me</span>
+					</div>
+					<button type='submit'>Login</button>
+				</form>
+			)}
+		/>
+	);
+};
+
+const Login = () => {
+	return (
 		<div>
 			<h3>Login</h3>
-			<LoginReduxForm onSubmit={onSubmit} />
+			<LoginForm />
 		</div>
 	);
 };
