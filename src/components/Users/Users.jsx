@@ -52,7 +52,7 @@ const Users = (props) => {
 							)}
 						</div>
 						<div>{user.name}</div>
-						<div>{user.status ? user.status : 'Status - Hello world !'}</div>
+						<div>{user.status ? user.status : 'No status!'}</div>
 					</div>
 				);
 			})}

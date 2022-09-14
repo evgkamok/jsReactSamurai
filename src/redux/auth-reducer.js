@@ -15,18 +15,36 @@ export default (state = initialState, { type, payload }) => {
 			return {
 				...state,
 				...payload,
-				isAuth: true,
 			};
 		default:
 			return state;
 	}
 };
-export const setAuthUserData = (payload) => ({ type: SET_AUTH_USER_DATA, payload });
+const setAuthUserData = ({ ...payload }) => ({
+	type: SET_AUTH_USER_DATA,
+	payload,
+});
 
-export const setAuthUserDataRequest = () => (dispatch) => {
+export const getAuthUserDataRequest = () => (dispatch) => {
 	userAuth.authMe().then((response) => {
 		if (response.data.resultCode === 0) {
-			dispatch(setAuthUserData(response.data.data));
+			dispatch(setAuthUserData({ ...response.data.data, isAuth: true }));
+		}
+	});
+};
+
+export const loginRequest = (email, password, rememberMe) => (dispatch) => {
+	userAuth.login(email, password, rememberMe).then((response) => {
+		if (response.data.resultCode === 0) {
+			dispatch(getAuthUserDataRequest());
+		}
+	});
+};
+
+export const logoutRequest = () => (dispatch) => {
+	userAuth.logout().then((response) => {
+		if (response.data.resultCode === 0) {
+			dispatch(setAuthUserData({ email: null, id: null, login: null, isAuth: false }));
 		}
 	});
 };

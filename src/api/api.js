@@ -30,16 +30,24 @@ export const userAPI = {
 
 export const profileAPI = {
 	getUserProfileStatus(userId) {
-		return axiosInstance.get(`/profile/status/${userId}`);
+		return axiosInstance.get(`profile/status/${userId}`);
 	},
 
 	updateUserProfileStatus(status) {
-		return axiosInstance.put(`/profile/status/`, { status });
+		return axiosInstance.put(`profile/status/`, { status });
 	},
 };
 
 export const userAuth = {
 	authMe() {
 		return axiosInstance.get(`auth/me`);
+	},
+
+	login(email, password, rememberMe = false) {
+		return axiosInstance.post('auth/login', { email, password, rememberMe });
+	},
+
+	logout() {
+		return axiosInstance.delete('auth/login');
 	},
 };

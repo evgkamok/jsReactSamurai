@@ -13,7 +13,6 @@ const AddPostForm = () => {
 				<form onSubmit={handleSubmit}>
 					<Field
 						name={'textPost'}
-						autofocus
 						validate={composeValidators(required, maxLength(10))}
 						placeholder={'Type here your new post'}
 						cols={35}

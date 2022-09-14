@@ -2,14 +2,13 @@ import React from 'react';
 import style from './Login.module.scss';
 import { CustomControlComponent } from '../common/Preloader/FormsControl/FormsControl';
 import { Form, Field } from 'react-final-form';
-import { composeValidators } from '../../utils/form-validators/validators';
+import { composeValidators, required } from '../../utils/form-validators/validators';
+import { connect } from 'react-redux';
+import { loginRequest } from '../../redux/auth-reducer';
 
-const required = (value) => (value ? undefined : 'Required');
-const mustBeNumber = (value) => (isNaN(value) ? 'Must be a number' : undefined);
-
-const LoginForm = () => {
-	const onSubmit = (formData) => {
-		console.log(formData);
+const LoginForm = (props) => {
+	const onSubmit = ({ email, password, rememberMe }) => {
+		props.loginRequest(email, password, rememberMe);
 	};
 
 	return (
@@ -23,7 +22,7 @@ const LoginForm = () => {
 					<Field
 						name={'password'}
 						type={'password'}
-						validate={composeValidators(required, mustBeNumber)}
+						validate={composeValidators(required)}
 						placeholder={'Password'}
 					>
 						{CustomControlComponent('input')}
@@ -39,13 +38,17 @@ const LoginForm = () => {
 	);
 };
 
-const Login = () => {
+const Login = (props) => {
 	return (
 		<div>
 			<h3>Login</h3>
-			<LoginForm />
+			<LoginForm loginRequest={props.loginRequest} />
 		</div>
 	);
 };
 
-export default Login;
+const mapStateToProps = (state) => ({
+	isAuth: state.authUser.isAuth,
+});
+
+export default connect(mapStateToProps, { loginRequest })(Login);
