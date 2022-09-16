@@ -34,10 +34,11 @@ export const getAuthUserDataRequest = () => (dispatch) => {
 };
 
 export const loginRequest = (email, password, rememberMe) => (dispatch) => {
-	userAuth.login(email, password, rememberMe).then((response) => {
+	return userAuth.login(email, password, rememberMe).then((response) => {
 		if (response.data.resultCode === 0) {
 			dispatch(getAuthUserDataRequest());
 		}
+		return response.data.messages[0];
 	});
 };
 

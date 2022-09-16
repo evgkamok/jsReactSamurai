@@ -1,7 +1,7 @@
 import React from 'react';
-import style from './FormsControl.module.scss';
+import style from './ControlFormComponent.module.scss';
 
-export const CustomControlComponent =
+export const ControlFormComponent =
 	(Component) =>
 	({ input, meta, ...props }) => {
 		return (

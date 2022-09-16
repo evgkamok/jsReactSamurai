@@ -2,7 +2,7 @@ import React from 'react';
 import style from './ProfilePosts.module.scss';
 import { composeValidators, maxLength, required } from '../../../utils/form-validators/validators';
 import { Form, Field } from 'react-final-form';
-import { CustomControlComponent } from '../../common/Preloader/FormsControl/FormsControl';
+import { ControlFormComponent } from '../../common/Preloader/FormsControl/ControlFormComponent';
 
 const AddPostForm = () => {
 	const onSubmit = (data) => console.log(data);
@@ -18,7 +18,7 @@ const AddPostForm = () => {
 						cols={35}
 						rows={10}
 					>
-						{CustomControlComponent('textarea')}
+						{ControlFormComponent('textarea')}
 					</Field>
 					<button type='submit'>Add Post</button>
 				</form>
