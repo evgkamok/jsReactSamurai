@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './Login.module.scss';
-import { ControlFormComponent } from '../common/Preloader/FormsControl/ControlFormComponent';
+import { ControlFormComponent } from '../common/FormsControl/ControlFormComponent';
 import { Form, Field } from 'react-final-form';
 import { composeValidators, required } from '../../utils/form-validators/validators';
 import { connect } from 'react-redux';

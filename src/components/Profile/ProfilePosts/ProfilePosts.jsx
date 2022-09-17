@@ -2,7 +2,7 @@ import React from 'react';
 import style from './ProfilePosts.module.scss';
 import { composeValidators, maxLength, required } from '../../../utils/form-validators/validators';
 import { Form, Field } from 'react-final-form';
-import { ControlFormComponent } from '../../common/Preloader/FormsControl/ControlFormComponent';
+import { ControlFormComponent } from '../../common/FormsControl/ControlFormComponent';
 
 const AddPostForm = () => {
 	const onSubmit = (data) => console.log(data);

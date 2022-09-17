@@ -1,4 +1,4 @@
-import { userAPI, profileAPI } from '../api/api';
+import { profileAPI } from '../api/api';
 
 const SET_USER_PROFILE_DATA = 'SET_USER_PROFILE_DATA ';
 const SET_USER_PROFILE_STATUS = 'SET_USER_PROFILE_STATUS';
@@ -13,7 +13,7 @@ const profileReducer = (state = initialState, action) => {
 		case SET_USER_PROFILE_DATA:
 			return { ...state, userProfileData: { ...action.data } };
 		case SET_USER_PROFILE_STATUS:
-			return { ...state, userProfileStatus: action.newStatus ? action.newStatus : 'aasdasd' };
+			return { ...state, userProfileStatus: action.newStatus ? action.newStatus : 'Status' };
 		default:
 			return state;
 	}
@@ -23,7 +23,7 @@ const setUserProfileData = (data) => ({ type: SET_USER_PROFILE_DATA, data });
 const setUserProfileStatus = (newStatus) => ({ type: SET_USER_PROFILE_STATUS, newStatus });
 
 export const setUserProfileDataRequest = (userId) => (dispatch) => {
-	userAPI.getUserProfileData(userId).then((response) => {
+	profileAPI.getUserProfileData(userId).then((response) => {
 		dispatch(setUserProfileData(response.data));
 	});
 };

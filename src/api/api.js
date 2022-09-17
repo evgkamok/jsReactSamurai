@@ -22,13 +22,13 @@ export const userAPI = {
 	stopFollow(userId) {
 		return axiosInstance.delete(`follow/${userId}`).then((response) => response);
 	},
-
-	getUserProfileData(userId) {
-		return axiosInstance.get(`profile/${userId}`);
-	},
 };
 
 export const profileAPI = {
+	getUserProfileData(userId) {
+		return axiosInstance.get(`profile/${userId}`);
+	},
+
 	getUserProfileStatus(userId) {
 		return axiosInstance.get(`profile/status/${userId}`);
 	},

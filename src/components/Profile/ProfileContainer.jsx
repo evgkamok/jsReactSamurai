@@ -8,14 +8,15 @@ import {
 } from '../../redux/profile-reducer';
 import Profile from './Profile';
 import { useEffect } from 'react';
+import { compose } from 'redux';
+import WithAuthRedirect from '../../hoc/withAuthRedirect';
 
 const ProfileContainer = (props) => {
 	let { userId } = useParams();
 
 	useEffect(() => {
 		if (!userId) {
-			userId = 23053;
-			// userId = 2;
+			userId = props.authUserId;
 		}
 		props.setUserProfileDataRequest(userId);
 		props.getUserProfileStatusRequest(userId);
@@ -32,13 +33,17 @@ const ProfileContainer = (props) => {
 
 const mapStateToProps = (state) => {
 	return {
+		authUserId: state.authUser.id,
 		userProfileData: state.profilePage.userProfileData,
 		userProfileStatus: state.profilePage.userProfileStatus,
 	};
 };
 
-export default connect(mapStateToProps, {
-	setUserProfileDataRequest,
-	getUserProfileStatusRequest,
-	updateUserProfileStatusRequest,
-})(ProfileContainer);
+export default compose(
+	WithAuthRedirect,
+	connect(mapStateToProps, {
+		setUserProfileDataRequest,
+		getUserProfileStatusRequest,
+		updateUserProfileStatusRequest,
+	})
+)(ProfileContainer);

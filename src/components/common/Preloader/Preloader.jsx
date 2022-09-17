@@ -1,12 +1,13 @@
-import React from 'react'
-import preloader from "../../../assets/preloader.svg"
+import React from 'react';
+import preloader from '../../../assets/preloader.svg';
+import style from './Profile.module.scss';
 
 const Preloader = () => {
-  return (
-    <div>
-      <img src={preloader} alt="preloader" />
-    </div>
-  )
-}
+	return (
+		<div className={style.wrapper}>
+			<img className={style.preloader} src={preloader} alt='preloader' />
+		</div>
+	);
+};
 
-export default Preloader
+export default Preloader;

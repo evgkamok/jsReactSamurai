@@ -1,0 +1,13 @@
+.wrapper {
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	.preloader {
+		width: 200px;
+		height: 200px;
+	}
+
+	background-color: azure;
+}

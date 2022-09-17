@@ -26,7 +26,7 @@ const setAuthUserData = ({ ...payload }) => ({
 });
 
 export const getAuthUserDataRequest = () => (dispatch) => {
-	userAuth.authMe().then((response) => {
+	return userAuth.authMe().then((response) => {
 		if (response.data.resultCode === 0) {
 			dispatch(setAuthUserData({ ...response.data.data, isAuth: true }));
 		}
