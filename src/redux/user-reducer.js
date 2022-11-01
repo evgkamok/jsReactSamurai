@@ -7,18 +7,7 @@ const SET_TOTAL_COUNT_PAGE = 'SET_TOTAL_COUNT_PAGE';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_IS_FETCHING = 'SET_IS_FETCHING';
 const SET_DISABLE_FOLLOW_BUTTON = 'SET_DISABLE_FOLLOW_BUTTON';
-// const initialState = {
-//   users: [
-//     {id: 1, photoUrl: "https://cm.author.today/content/2021/06/16/a/c4c2925ffec046f58ad57496ef147b85.jpg",
-//     followed: true, fullName: "Dima", status: "Status - Hello world", location: {city: "Minsk", country: "Belarus"}},
-//     {id: 2, photoUrl: "https://cm.author.today/content/2021/06/16/a/c4c2925ffec046f58ad57496ef147b85.jpg",
-//     followed: true, fullName: "Jeka", status: "Status - Hello world", location: {city: "Minsk", country: "Belarus"}},
-//     {id: 3, photoUrl: "https://cm.author.today/content/2021/06/16/a/c4c2925ffec046f58ad57496ef147b85.jpg",
-//     followed: true, fullName: "Maks", status: "Status - Hello world", location: {city: "Minsk", country: "Belarus"}},
-//     {id: 4, photoUrl: "https://cm.author.today/content/2021/06/16/a/c4c2925ffec046f58ad57496ef147b85.jpg",
-//     followed: true, fullName: "Sasha", status: "Status - Hello world", location: {city: "Minsk", country: "Belarus"}},
-//   ]
-// }
+const FAKE = 'FAKE';
 
 const initialState = {
 	users: [],
@@ -27,6 +16,7 @@ const initialState = {
 	currentPage: 1,
 	isFetching: false,
 	buttonsDisabledStack: [],
+	fakeCount: 0,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -84,6 +74,11 @@ const userReducer = (state = initialState, action) => {
 					? [...state.buttonsDisabledStack, action.id]
 					: state.buttonsDisabledStack.filter((id) => id !== action.id),
 			};
+		case FAKE:
+			return {
+				...state,
+				fakeCount: state.fakeCount + 1,
+			};
 		default:
 			return state;
 	}
@@ -101,7 +96,7 @@ const setDisableFollowButton = (id, status) => ({
 });
 export const setCurrentPage = (payload) => ({ type: SET_CURRENT_PAGE, payload });
 
-export const getUsers = (currentPage, countOnPage) => (dispatch) => {
+export const getUsersRequest = (currentPage, countOnPage) => (dispatch) => {
 	dispatch(setIsFetching(true));
 	userAPI.getUsers(currentPage, countOnPage).then((data) => {
 		dispatch(setUsers(data.items));

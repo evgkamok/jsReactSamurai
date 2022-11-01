@@ -3,19 +3,20 @@ import { connect } from 'react-redux';
 import Users from './Users';
 import {
 	setCurrentPage,
-	getUsers,
+	getUsersRequest,
 	startFollowUserRequest,
 	stopFollowUserRequest,
 } from '../../redux/user-reducer';
+import { getCountOnPage, getUsers } from '../../redux/user-selectors';
 
 class UserContainer extends React.Component {
 	componentDidMount() {
-		this.props.getUsers(this.props.currentPage, this.props.countOnPage);
+		this.props.getUsersRequest(this.props.currentPage, this.props.countOnPage);
 	}
 
 	changeCurrentPage = (numberPage) => {
 		this.props.setCurrentPage(numberPage);
-		this.props.getUsers(numberPage, this.props.countOnPage);
+		this.props.getUsersRequest(numberPage, this.props.countOnPage);
 	};
 
 	render() {
@@ -41,8 +42,8 @@ class UserContainer extends React.Component {
 
 const mapStateToProps = (state) => {
 	return {
-		users: state.userPage.users,
-		countOnPage: state.userPage.countOnPage,
+		users: getUsers(state),
+		countOnPage: getCountOnPage(state),
 		totalCountPage: state.userPage.totalCountPage,
 		currentPage: state.userPage.currentPage,
 		isFetching: state.userPage.isFetching,
@@ -52,7 +53,7 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
 	setCurrentPage,
-	getUsers,
+	getUsersRequest,
 	startFollowUserRequest,
 	stopFollowUserRequest,
 })(UserContainer);

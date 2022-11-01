@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import style from './Dialogs.module.scss';
 import { Field, reduxForm } from 'redux-form';
+import style from './Dialogs.module.scss';
 
 const AddDialogsForm = (props) => {
 	return (

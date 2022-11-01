@@ -39,7 +39,6 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-	isAuth: state.authUser.isAuth,
 	isInitializedAppSuccess: state.app.isInitializedAppSuccess,
 });
 

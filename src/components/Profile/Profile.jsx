@@ -4,6 +4,7 @@ import style from './Profile.module.scss';
 import ProfileStatus from './ProfileStatus/ProfileStatus';
 import defaultPhoto from '../../assets/defaultPhoto.jpg';
 import ProfilePostsContainer from './ProfilePosts/ProfilePostsContainer';
+
 export default function Profile(props) {
 	if (!props.userId) {
 		return <Preloader />;

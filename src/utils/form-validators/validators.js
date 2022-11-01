@@ -1,10 +1,10 @@
 export const required = (value) => {
 	return value ? undefined : 'Required';
 };
-export const mustBeNumber = (value) => (isNaN(value) ? 'Must be a number' : undefined);
-export const maxLength = (maxLength) => (value) => {
-	console.log('re2q');
 
+export const mustBeNumber = (value) => (isNaN(value) ? 'Must be a number' : undefined);
+
+export const maxLength = (maxLength) => (value) => {
 	return value.length >= maxLength ? `Max length is ${maxLength} symbols` : undefined;
 };
 
