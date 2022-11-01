@@ -25,6 +25,7 @@ const ProfileContainer = (props) => {
 	return (
 		<Profile
 			{...props.userProfileData}
+			authUserId={props.authUserId}
 			userProfileStatus={props.userProfileStatus}
 			updateUserProfileStatusRequest={props.updateUserProfileStatusRequest}
 		/>

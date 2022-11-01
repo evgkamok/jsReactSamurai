@@ -21,6 +21,8 @@ export default function Profile(props) {
 				<ProfileStatus
 					userProfileStatus={props.userProfileStatus}
 					updateUserProfileStatusRequest={props.updateUserProfileStatusRequest}
+					authUserId={props.authUserId}
+					userId={props.userId}
 				/>
 			</div>
 			<div className={style.profilePosts}>
