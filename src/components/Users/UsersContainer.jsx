@@ -9,7 +9,7 @@ import {
 } from '../../redux/user-reducer';
 import { getCountOnPage, getUsers } from '../../redux/user-selectors';
 
-class UserContainer extends React.Component {
+class UserContainer extends React.PureComponent {
 	componentDidMount() {
 		this.props.getUsersRequest(this.props.currentPage, this.props.countOnPage);
 	}
@@ -19,7 +19,12 @@ class UserContainer extends React.Component {
 		this.props.getUsersRequest(numberPage, this.props.countOnPage);
 	};
 
+	shouldComponentUpdate(nextProps, nextState) {
+		return nextProps != this.props || nextState !== this.state;
+	}
+
 	render() {
+		console.log('RENDER');
 		const pages = Math.ceil(this.props.totalCountPage / this.props.countOnPage);
 		const pagesNumbers = [];
 		for (let i = 1; i <= pages; i++) {
